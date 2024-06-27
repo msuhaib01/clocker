@@ -33,8 +33,36 @@ class UserData {
     window.localStorage.removeItem("data");
   }
 }
+
+class Time {
+  start;
+  simple_timer() {
+    this.start = 0;
+    const d = new Date();
+    let initial = d.getTime();
+    const timerInterval = setInterval(() => {
+      this.start = Date.now() - initial;
+      document.getElementById("goal_time").textContent = this.display_time();
+    }, 10);
+  }
+
+  display_time() {
+    const mili = this.start;
+    const second = Math.floor(mili / 1000);
+    const minute = Math.floor(second / 60);
+    const hour = Math.floor(minute / 60);
+    const print_mili = (mili % 1000).toString().padStart(3, "0");
+    const print_second = (second % 60).toString().padStart(2, "0");
+    const print_minute = (minute % 60).toString().padStart(2, "0");
+    const print_hour = (hour % 24).toString().padStart(2, "0");
+    return `${print_hour}:${print_minute}:${print_second}:${print_mili}`;
+  }
+}
+
 function handle_main_button_click() {
   console.log("HELLO BUTTON");
+  const time = new Time();
+  time.simple_timer();
 }
 function main() {
   console.log("hello world");
