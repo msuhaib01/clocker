@@ -1,43 +1,3 @@
-// class UserData {
-//   time_goal = 0;
-//   time_to_goal = 0;
-//   time_wasteable = 0;
-//   time_wasted = 0;
-//   time_wasteable_remaining = 0;
-//   constructor(goal, wasteable) {
-//     this.time_goal = goal;
-//     this.time_wasteable = wasteable;
-//     this.time_wasteable_remaining = wasteable;
-//   }
-//   save_data_to_local() {
-//     data = {
-//       time_goal: this.time_goal,
-//       time_to_goal: this.time_to_goal,
-//       time_wasteable: this.time_wasteable,
-//       time_wasted: this.time_wasted,
-//       time_wasted_remaining: this.time_wasted_remaining,
-//     };
-//     window.localStorage.setItem("data", JSON.stringify(data));
-//   }
-
-//   overwrite_state_with_local_data() {
-//     data = JSON.parse(window.localStorage.getItem("data"));
-//     this.time_goal = data.time_goal;
-//     this.time_to_goal = data.time_to_goal;
-//     this.time_wasteable = data.time_wasteable;
-//     this.time_wasted = data.time_wasteable;
-//     this.time_wasted_remaining = data.time_wasted_remaining;
-//   }
-
-//   delete_local_storage() {
-//     window.localStorage.removeItem("data");
-//   }
-// }
-
-class Storage {
-  constructor() {}
-}
-
 // what data do i actually need?
 // miliseconds on count up clock
 // milisecods left on count down clock
@@ -86,6 +46,13 @@ class AppState {
   }
 }
 
+function handleCounterUpButtonClick() {
+  input_field = document.querySelector("counterUpInputId");
+  input_field_value = input_field.value;
+  if (input_field == "") {
+  }
+}
+
 function handle_main_button_click() {
   if (appState.previous_data == false) {
     if (appState.paused_or_running == "paused") {
@@ -98,6 +65,8 @@ function handle_main_button_click() {
     }
   }
 }
+
+function startUp() {}
 
 const appState = new AppState();
 const time = new Time();
