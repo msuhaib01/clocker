@@ -2,28 +2,24 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <link href="./output.css" rel="stylesheet" />
     <title>Vite App</title>
   </head>
-  <body class="bg-black text-slate-300 relative">
+  <body class="bg-black text-slate-100 relative">
     <div class="flex justify-between flex-col md:flex-row h-screen">
       <div
-        class="border border-white w-full h-full flex-col justify-center items-center p-10"
+        class="border border-white w-full h-full flex flex-col items-center gap-12 p-10"
       >
-        <h1 class="text-3xl font-bold underline border border-slate-400">
-          Counter Up
-        </h1>
-        <h2 class="text-2xl font-bold underline">Time</h2>
+        <h1 class="text-3xl font-bold underline">Counter Up</h1>
+        <h2 class="text-5xl font-bold">Time</h2>
       </div>
       <div
-        class="border border-white w-full h-full flex-col justify-center items-center p-10"
+        class="border border-white w-full h-full flex flex-col items-center gap-12 p-10"
       >
-        <h1 class="text-3xl font-bold underline border border-slate-400">
-          Counter Down
-        </h1>
-        <h2 class="text-2xl font-bold underline">Time</h2>
+        <h1 class="text-3xl font-bold underline">Counter Down</h1>
+        <h2 class="text-5xl font-bold">Time</h2>
       </div>
       <div
         class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border border-green-400 p-4 m-0"
