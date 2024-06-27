@@ -1,51 +1,64 @@
-class UserData {
-  time_goal = 0;
-  time_to_goal = 0;
-  time_wasteable = 0;
-  time_wasted = 0;
-  time_wasteable_remaining = 0;
-  constructor(goal, wasteable) {
-    this.time_goal = goal;
-    this.time_wasteable = wasteable;
-    this.time_wasteable_remaining = wasteable;
-  }
-  save_data_to_local() {
-    data = {
-      time_goal: this.time_goal,
-      time_to_goal: this.time_to_goal,
-      time_wasteable: this.time_wasteable,
-      time_wasted: this.time_wasted,
-      time_wasted_remaining: this.time_wasted_remaining,
-    };
-    window.localStorage.setItem("data", JSON.stringify(data));
-  }
+// class UserData {
+//   time_goal = 0;
+//   time_to_goal = 0;
+//   time_wasteable = 0;
+//   time_wasted = 0;
+//   time_wasteable_remaining = 0;
+//   constructor(goal, wasteable) {
+//     this.time_goal = goal;
+//     this.time_wasteable = wasteable;
+//     this.time_wasteable_remaining = wasteable;
+//   }
+//   save_data_to_local() {
+//     data = {
+//       time_goal: this.time_goal,
+//       time_to_goal: this.time_to_goal,
+//       time_wasteable: this.time_wasteable,
+//       time_wasted: this.time_wasted,
+//       time_wasted_remaining: this.time_wasted_remaining,
+//     };
+//     window.localStorage.setItem("data", JSON.stringify(data));
+//   }
 
-  overwrite_state_with_local_data() {
-    data = JSON.parse(window.localStorage.getItem("data"));
-    this.time_goal = data.time_goal;
-    this.time_to_goal = data.time_to_goal;
-    this.time_wasteable = data.time_wasteable;
-    this.time_wasted = data.time_wasteable;
-    this.time_wasted_remaining = data.time_wasted_remaining;
-  }
+//   overwrite_state_with_local_data() {
+//     data = JSON.parse(window.localStorage.getItem("data"));
+//     this.time_goal = data.time_goal;
+//     this.time_to_goal = data.time_to_goal;
+//     this.time_wasteable = data.time_wasteable;
+//     this.time_wasted = data.time_wasteable;
+//     this.time_wasted_remaining = data.time_wasted_remaining;
+//   }
 
-  delete_local_storage() {
-    window.localStorage.removeItem("data");
-  }
+//   delete_local_storage() {
+//     window.localStorage.removeItem("data");
+//   }
+// }
+
+class Storage {
+  constructor() {}
 }
 
+// what data do i actually need?
+// miliseconds on count up clock
+// milisecods left on count down clock
+//
 class Time {
-  start;
-  simple_timer() {
+  timer;
+  constructor() {
     this.start = 0;
-    const d = new Date();
-    let initial = d.getTime();
+  }
+  start_timer() {
+    let initial = Date.now();
     const timerInterval = setInterval(() => {
       this.start = Date.now() - initial;
       document.getElementById("goal_time").textContent = this.display_time();
     }, 10);
+    this.timer = timerInterval;
   }
 
+  stop_timer() {
+    clearInterval(this.timer);
+  }
   display_time() {
     const mili = this.start;
     const second = Math.floor(mili / 1000);
@@ -59,15 +72,36 @@ class Time {
   }
 }
 
-function handle_main_button_click() {
-  console.log("HELLO BUTTON");
-  const time = new Time();
-  time.simple_timer();
-}
-function main() {
-  console.log("hello world");
-  const main_button = document.querySelector("#main_button");
-  main_button.addEventListener("click", handle_main_button_click);
+class AppState {
+  paused_or_running = "paused";
+  previous_data = false;
+
+  constructor() {
+    const app_data = JSON.parse(window.localStorage.getItem("data"));
+    if (app_data == null) {
+      this.previous_data = false;
+    } else {
+      this.previous_data = true;
+    }
+  }
 }
 
-main();
+function handle_main_button_click() {
+  if (appState.previous_data == false) {
+    if (appState.paused_or_running == "paused") {
+      console.log("HELLO BUTTON");
+      time.start_timer();
+      appState.paused_or_running = "running";
+    } else if (appState.paused_or_running == "running") {
+      time.stop_timer();
+      appState.paused_or_running = "paused";
+    }
+  }
+}
+
+const appState = new AppState();
+const time = new Time();
+console.log("hello world");
+console.log(appState.previous_data);
+const main_button = document.querySelector("#main_button");
+main_button.addEventListener("click", handle_main_button_click);
