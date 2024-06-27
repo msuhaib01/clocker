@@ -1,5 +1,3 @@
-localStorage = window.localStorage;
-
 class UserData {
   time_goal = 0;
   time_to_goal = 0;
@@ -19,11 +17,11 @@ class UserData {
       time_wasted: this.time_wasted,
       time_wasted_remaining: this.time_wasted_remaining,
     };
-    localStorage.setItem("data", JSON.stringify(data));
+    window.localStorage.setItem("data", JSON.stringify(data));
   }
 
   overwrite_state_with_local_data() {
-    data = JSON.parse(localStorage.getItem("data"));
+    data = JSON.parse(window.localStorage.getItem("data"));
     this.time_goal = data.time_goal;
     this.time_to_goal = data.time_to_goal;
     this.time_wasteable = data.time_wasteable;
@@ -32,12 +30,16 @@ class UserData {
   }
 
   delete_local_storage() {
-    localStorage.removeItem("data");
+    window.localStorage.removeItem("data");
   }
 }
-
+function handle_main_button_click() {
+  console.log("HELLO BUTTON");
+}
 function main() {
   console.log("hello world");
+  const main_button = document.querySelector("#main_button");
+  main_button.addEventListener("click", handle_main_button_click);
 }
 
 main();
