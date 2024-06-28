@@ -27,16 +27,6 @@ class Time {
     let initial = Date.now() - this.elapsed;
     this.timer = setInterval(() => {
       this.start = Date.now() - initial;
-
-      // console.log("this.elapsed");
-      // console.log(this.elapsed);
-      // console.log("Date.now()");
-      // console.log(Date.now());
-      // console.log("initial = Date.nowOG() - this.elapsed");
-      // console.log(initial);
-      // console.log("this.start = Date.now() - initial");
-      // console.log(this.start);
-
       this.updateGoalTimer();
     }, 1);
   }
@@ -135,14 +125,7 @@ class AppState {
   constructor() {
     this.switchAB = "A";
     this.running = false;
-    this.previous_data = false;
-
     const app_data = JSON.parse(window.localStorage.getItem("data"));
-    if (app_data == null) {
-      this.previous_data = false;
-    } else {
-      this.previous_data = true;
-    }
   }
 }
 
@@ -185,28 +168,24 @@ function handle_reset_button_click() {
 }
 
 function handle_main_button_click() {
-  if (appState.previous_data == false) {
-    if (appState.running == false) {
-      appState.running = true;
+  if (appState.running == false) {
+    appState.running = true;
+    appState.switchAB = "B";
+    time.start_timer();
+  } else if (appState.running == true) {
+    if (appState.switchAB == "A") {
       appState.switchAB = "B";
       time.start_timer();
-    } else if (appState.running == true) {
-      if (appState.switchAB == "A") {
-        appState.switchAB = "B";
-        time.start_timer();
-        countDown.stop_timer();
-      } else if (appState.switchAB == "B") {
-        appState.switchAB = "A";
-        countDown.start_timer();
-        time.stop_timer();
-      }
-      // time.stop_timer();
-      // appState.paused_or_running = "paused";
+      countDown.stop_timer();
+    } else if (appState.switchAB == "B") {
+      appState.switchAB = "A";
+      countDown.start_timer();
+      time.stop_timer();
     }
+    // time.stop_timer();
+    // appState.paused_or_running = "paused";
   }
 }
-
-function startUp() {}
 
 const appState = new AppState();
 const time = new Time();
