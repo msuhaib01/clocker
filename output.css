@@ -619,6 +619,10 @@ video {
   gap: 2rem;
 }
 
+.gap-16 {
+  gap: 4rem;
+}
+
 .border {
   border-width: 1px;
 }
