@@ -85,16 +85,6 @@ class TimeCountDown {
     let initial = Date.now() - this.elapsed;
     this.timer = setInterval(() => {
       this.start = Date.now() - initial;
-
-      // console.log("this.elapsed");
-      // console.log(this.elapsed);
-      // console.log("Date.now()");
-      // console.log(Date.now());
-      // console.log("initial = Date.nowOG() - this.elapsed");
-      // console.log(initial);
-      // console.log("this.start = Date.now() - initial");
-      // console.log(this.start);
-
       this.updateGoalTimer();
     }, 1);
   }
@@ -116,7 +106,19 @@ class TimeCountDown {
   }
 
   display_time() {
-    const disp_time = this.to_lose - this.start;
+    let disp_time = this.to_lose - this.start;
+    if (disp_time < 0) {
+      disp_time = 0 - disp_time;
+      const mili = disp_time;
+      const second = Math.floor(mili / 1000);
+      const minute = Math.floor(second / 60);
+      const hour = Math.floor(minute / 60);
+      const print_mili = (mili % 1000).toString().padStart(3, "0");
+      const print_second = (second % 60).toString().padStart(2, "0");
+      const print_minute = (minute % 60).toString().padStart(2, "0");
+      const print_hour = (hour % 24).toString().padStart(2, "0");
+      return `-${print_hour}:${print_minute}:${print_second}:${print_mili}`;
+    }
     const mili = disp_time;
     const second = Math.floor(mili / 1000);
     const minute = Math.floor(second / 60);
