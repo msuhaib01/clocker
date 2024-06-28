@@ -6,10 +6,20 @@ const elementGoalTimer = document.getElementById("goal_time");
 const elementCountDown = document.getElementById("count_down_time");
 const main_button = document.querySelector("#main_button");
 const reset_button = document.querySelector("#reset_button");
+const counterUpInputIdButton = document.querySelector(
+  "#counterUpInputIdButton"
+);
+const counterDownIdButton = document.querySelector("#counterDownIdButton");
+
+const input_field = document.querySelector("#counterUpInputId");
+const counterUpGoalValue = document.querySelector("#counterUpGoalValue");
+
+const input_field_count_down = document.querySelector("#counterDownInputId");
+const counterDownTextValue = document.querySelector("#counterDownTextValue");
 
 // constants
 class Time {
-  constructor(to_lose) {
+  constructor() {
     this.start = 0;
     this.elapsed = 0;
   }
@@ -66,6 +76,11 @@ class TimeCountDown {
     this.elapsed = 0;
     this.to_lose = to_lose * 3600000;
   }
+  update_to_lose(to_lose) {
+    this.to_lose = to_lose * 3600000;
+    this.updateGoalTimer();
+  }
+
   start_timer() {
     let initial = Date.now() - this.elapsed;
     this.timer = setInterval(() => {
@@ -130,15 +145,40 @@ class AppState {
 }
 
 function handleCounterUpButtonClick() {
-  input_field = document.querySelector("counterUpInputId");
-  input_field_value = input_field.value;
-  if (input_field == "") {
+  const input_field_value = input_field.value;
+  const input_field_val_int = parseInt(input_field_value);
+  if (input_field_value == "") {
+    console.log("empty no go");
+  } else if (isNaN(input_field_val_int)) {
+    console.log("its not a number");
+  } else {
+    console.log("we good");
+    counterUpGoalValue.textContent = `${input_field_val_int} hours`;
+    input_field.value = "";
+  }
+}
+
+function handleCounterDownButtonClick() {
+  const input_field_value = input_field_count_down.value;
+  const input_field_val_int = parseInt(input_field_value);
+  if (input_field_value == "") {
+    console.log("empty no go");
+  } else if (isNaN(input_field_val_int)) {
+    console.log("its not a number");
+  } else {
+    console.log("we good");
+    counterDownTextValue.textContent = `${input_field_val_int} hours`;
+    input_field_count_down.value = "";
+    countDown.update_to_lose(input_field_val_int);
   }
 }
 
 function handle_reset_button_click() {
   time.reset_timer();
   countDown.reset_timer();
+  counterUpGoalValue.textContent = `${12} hours`;
+  counterDownTextValue.textContent = `${4} hours`;
+  countDown.update_to_lose(4);
   appState.switchAB = "A";
 }
 
@@ -173,3 +213,5 @@ console.log("hello world");
 console.log(appState.previous_data);
 main_button.addEventListener("click", handle_main_button_click);
 reset_button.addEventListener("click", handle_reset_button_click);
+counterUpInputIdButton.addEventListener("click", handleCounterUpButtonClick);
+counterDownIdButton.addEventListener("click", handleCounterDownButtonClick);

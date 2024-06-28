@@ -8,7 +8,7 @@
     <title>Vite App</title>
   </head>
   <body class="bg-black text-slate-100 relative">
-    <div class="flex justify-between flex-col md:flex-row h-screen">
+    <div class="flex justify-between flex-col md:flex-row md:h-screen">
       <div
         class="border border-white w-full h-full flex flex-col items-center gap-8 p-16"
       >
@@ -16,7 +16,7 @@
         <h2 id="goal_time" class="text-5xl font-bold my-16">00:00:00:000</h2>
         <div class="flex flex-col items-center">
           <h1 class="text-3xl font-bold underline">Goal:</h1>
-          <h1 class="text-3xl font-bold">12 hours</h1>
+          <h1 id="counterUpGoalValue" class="text-3xl font-bold">12 hours</h1>
         </div>
         <div class="flex gap-2">
           <input
@@ -24,37 +24,14 @@
             class="bg-black w-12 text-slate-100 text-lg border-2 border-slate-200 font-semibold border-dashed focus-within:outline-none p-2 text-center"
           />
           <button
+            id="counterUpInputIdButton"
             class="bg-black text-slate-100 text-lg border-2 border-slate-200 font-semibold active:border-dashed active:outline-none p-2"
           >
             Set
           </button>
         </div>
       </div>
-      <div
-        class="border border-white w-full h-full flex flex-col items-center gap-8 p-16"
-      >
-        <h1 class="text-4xl font-bold underline">Counter Down</h1>
-        <h2 id="count_down_time" class="text-5xl font-bold my-16">
-          04:00:00:000
-        </h2>
-        <div class="flex flex-col items-center">
-          <h1 class="text-3xl font-bold underline">Goal:</h1>
-          <h1 class="text-3xl font-bold">12 hours</h1>
-        </div>
-        <div class="flex gap-2">
-          <input
-            class="bg-black w-12 text-slate-100 text-lg border-2 border-slate-200 font-semibold border-dashed focus-within:outline-none p-2 text-center"
-          />
-          <button
-            class="bg-black text-slate-100 text-lg border-2 border-slate-200 font-semibold active:border-dashed active:outline-none p-2"
-          >
-            Set
-          </button>
-        </div>
-      </div>
-      <div
-        class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 border border-green-400 p-4 m-0 flex md:flex-col flex-row gap-4"
-      >
+      <div class="p-4 m-0 flex md:flex-col flex-row justify-center gap-4">
         <button
           id="main_button"
           class="bg-black text-slate-100 text-lg border-2 border-slate-200 font-semibold active:border-dashed active:outline-none p-2"
@@ -67,6 +44,31 @@
         >
           Reset
         </button>
+      </div>
+
+      <div
+        class="border border-white w-full h-full flex flex-col items-center gap-8 p-16"
+      >
+        <h1 class="text-4xl font-bold underline">Counter Down</h1>
+        <h2 id="count_down_time" class="text-5xl font-bold my-16">
+          04:00:00:000
+        </h2>
+        <div class="flex flex-col items-center">
+          <h1 class="text-3xl font-bold underline">Time To Lose:</h1>
+          <h1 id="counterDownTextValue" class="text-3xl font-bold">4 hours</h1>
+        </div>
+        <div class="flex gap-2">
+          <input
+            id="counterDownInputId"
+            class="bg-black w-12 text-slate-100 text-lg border-2 border-slate-200 font-semibold border-dashed focus-within:outline-none p-2 text-center"
+          />
+          <button
+            id="counterDownIdButton"
+            class="bg-black text-slate-100 text-lg border-2 border-slate-200 font-semibold active:border-dashed active:outline-none p-2"
+          >
+            Set
+          </button>
+        </div>
       </div>
     </div>
     <script type="module" src="/main.js"></script>
