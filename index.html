@@ -13,7 +13,7 @@
         class="border border-white w-full h-full flex flex-col items-center gap-8 p-16"
       >
         <h1 class="text-4xl font-bold underline">Counter Up</h1>
-        <h2 id="goal_time" class="text-5xl font-bold my-16">Time</h2>
+        <h2 id="goal_time" class="text-5xl font-bold my-16">00:00:00:000</h2>
         <div class="flex flex-col items-center">
           <h1 class="text-3xl font-bold underline">Goal:</h1>
           <h1 class="text-3xl font-bold">12 hours</h1>
@@ -34,7 +34,9 @@
         class="border border-white w-full h-full flex flex-col items-center gap-8 p-16"
       >
         <h1 class="text-4xl font-bold underline">Counter Down</h1>
-        <h2 id="waste_time" class="text-5xl font-bold my-16">Time</h2>
+        <h2 id="count_down_time" class="text-5xl font-bold my-16">
+          04:00:00:000
+        </h2>
         <div class="flex flex-col items-center">
           <h1 class="text-3xl font-bold underline">Goal:</h1>
           <h1 class="text-3xl font-bold">12 hours</h1>
@@ -60,7 +62,7 @@
           Start
         </button>
         <button
-          id="main_button"
+          id="reset_button"
           class="bg-black text-slate-100 text-lg border-2 border-slate-200 font-semibold active:border-dashed active:outline-none p-2"
         >
           Reset
