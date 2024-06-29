@@ -6,6 +6,7 @@ const elementGoalTimer = document.getElementById("goal_time");
 const elementCountDown = document.getElementById("count_down_time");
 const main_button = document.querySelector("#main_button");
 const reset_button = document.querySelector("#reset_button");
+const hide_button = document.querySelector("#hide_button");
 const counterUpInputIdButton = document.querySelector(
   "#counterUpInputIdButton"
 );
@@ -210,6 +211,19 @@ function handle_main_button_click() {
   }
 }
 
+function handleHideButtonClick() {
+  const hide1 = document.querySelector("#hide_1");
+  const hide2 = document.querySelector("#hide_2");
+  console.log(hide1.classList);
+  if (hide1.classList.contains("invisible")) {
+    hide1.classList.remove("invisible");
+    hide2.classList.remove("invisible");
+  } else {
+    hide1.classList.add("invisible");
+    hide2.classList.add("invisible");
+  }
+}
+
 const appState = new AppState();
 const time = new Time();
 const countDown = new TimeCountDown();
@@ -217,7 +231,7 @@ main_button.addEventListener("click", handle_main_button_click);
 reset_button.addEventListener("click", handle_reset_button_click);
 counterUpInputIdButton.addEventListener("click", handleCounterUpButtonClick);
 counterDownIdButton.addEventListener("click", handleCounterDownButtonClick);
-
+hide_button.addEventListener("click", handleHideButtonClick);
 localStorage.setItem("test", 1);
 +localStorage.getItem("test");
 
