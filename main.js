@@ -183,6 +183,7 @@ function handle_reset_button_click() {
   countDown.reset_timer();
   counterUpGoalValue.textContent = `${12} hours`;
   counterDownTextValue.textContent = `${4} hours`;
+  document.querySelector("#main_button").textContent = "Start";
   countDown.update_to_lose(4);
   appState.switchAB = "A";
 }
@@ -194,6 +195,7 @@ function handle_main_button_click() {
     time.start_timer();
     document.querySelector("#main_button").textContent = "Switch";
   } else if (appState.running == true) {
+    document.querySelector("#main_button").textContent = "Switch";
     if (appState.switchAB == "A") {
       appState.switchAB = "B";
       time.start_timer();
