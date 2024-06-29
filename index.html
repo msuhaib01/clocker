@@ -7,8 +7,8 @@
     <title>CLOCKER</title>
   </head>
   <body class="bg-black text-slate-100 relative">
-    <div class="flex justify-center flex-col gap-16 lg:flex-row lg:h-screen">
-      <div class="flex flex-col justify-center items-center gap-8 p-16">
+    <div class="flex justify-center flex-col gap-2 md:flex-row md:h-screen">
+      <div class="flex flex-col justify-center items-center gap-4 p-8">
         <h1 class="text-4xl font-bold underline">Counter Up</h1>
         <h2 id="goal_time" class="text-5xl font-bold my-16">00:00:00:000</h2>
         <div class="flex flex-col items-center">
@@ -28,22 +28,21 @@
           </button>
         </div>
       </div>
-      <div class="p-4 m-0 flex lg:flex-col flex-row justify-center gap-4">
+      <div class="p-4 m-0 flex md:flex-col flex-row justify-center gap-4">
         <button
           id="main_button"
-          class="bg-black text-slate-100 text-lg border-2 border-slate-200 font-semibold active:border-dashed active:outline-none p-2"
+          class="bg-black text-slate-100 border-2 border-slate-200 font-semibold active:border-dashed active:outline-none p-3 w-24 text-xl"
         >
           Start
         </button>
         <button
           id="reset_button"
-          class="bg-black text-slate-100 text-lg border-2 border-slate-200 font-semibold active:border-dashed active:outline-none p-2"
+          class="bg-black text-slate-100 border-2 border-slate-200 font-semibold active:border-dashed active:outline-none p-3 text-xl"
         >
           Reset
         </button>
       </div>
-
-      <div class="flex flex-col justify-center items-center gap-8 p-16">
+      <div class="flex flex-col justify-center items-center gap-4 p-8">
         <h1 class="text-4xl font-bold underline">Counter Down</h1>
         <h2 id="count_down_time" class="text-5xl font-bold my-16">
           04:00:00:000

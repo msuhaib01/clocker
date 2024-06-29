@@ -190,6 +190,7 @@ function handle_main_button_click() {
     appState.running = true;
     appState.switchAB = "B";
     time.start_timer();
+    document.querySelector("#main_button").textContent = "Switch";
   } else if (appState.running == true) {
     if (appState.switchAB == "A") {
       appState.switchAB = "B";
