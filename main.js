@@ -19,26 +19,32 @@ const counterDownTextValue = document.querySelector("#counterDownTextValue");
 
 // constants
 class Time {
-  constructor() {
-    this.start = 0;
-    this.elapsed = 0;
-  }
+  // constructor() {
+  //   this.start = +localStorage.getItem("start") || 0;
+  //   this.elapsed = +localStorage.getItem("elapsed") || 0;
+  // }
   start_timer() {
-    let initial = Date.now() - this.elapsed;
+    const elapsed_temp = +localStorage.getItem("elapsed");
+    let initial = Date.now() - elapsed_temp;
     this.timer = setInterval(() => {
-      this.start = Date.now() - initial;
+      const temp = Date.now() - initial;
+      localStorage.setItem("start", temp);
       this.updateGoalTimer();
     }, 1);
   }
 
   stop_timer() {
-    this.elapsed = this.start;
+    const elapsed_temp = +localStorage.getItem("start");
+    localStorage.setItem("elapsed", elapsed_temp);
+
     clearInterval(this.timer);
   }
 
   reset_timer() {
-    this.elapsed = 0;
-    this.start = 0;
+    localStorage.setItem("elapsed", 0);
+    localStorage.setItem("start", 0);
+    localStorage.setItem("counterUpGoalVal", 12);
+
     clearInterval(this.timer);
     this.updateGoalTimer();
   }
@@ -48,7 +54,7 @@ class Time {
   }
 
   display_time() {
-    const mili = this.start;
+    const mili = +localStorage.getItem("start");
     const second = Math.floor(mili / 1000);
     const minute = Math.floor(second / 60);
     const hour = Math.floor(minute / 60);
@@ -61,32 +67,36 @@ class Time {
 }
 
 class TimeCountDown {
-  constructor(to_lose = 4) {
-    this.start = 0;
-    this.elapsed = 0;
-    this.to_lose = to_lose * 3600000;
-  }
+  // constructor(to_lose = 4) {
+  //   this.to_lose = to_lose * 3600000;
+  // }
   update_to_lose(to_lose) {
-    this.to_lose = to_lose * 3600000;
+    localStorage.setItem("to_lose_ms", to_lose * 3600000);
     this.updateGoalTimer();
   }
 
   start_timer() {
-    let initial = Date.now() - this.elapsed;
+    let initial = Date.now() - localStorage.getItem("elapsed_count_downer");
     this.timer = setInterval(() => {
-      this.start = Date.now() - initial;
+      const start_count_downer_temp = Date.now() - initial;
+      localStorage.setItem("start_count_downer", start_count_downer_temp);
       this.updateGoalTimer();
     }, 1);
   }
 
   stop_timer() {
-    this.elapsed = this.start;
+    localStorage.setItem(
+      "elapsed_count_downer",
+      +localStorage.getItem("start_count_downer")
+    );
     clearInterval(this.timer);
   }
 
   reset_timer() {
-    this.elapsed = 0;
-    this.start = 0;
+    localStorage.setItem("elapsed_count_downer", 0);
+    localStorage.setItem("start_count_downer", 0);
+    localStorage.setItem("to_lose_ms", 4 * 3600000);
+    localStorage.setItem("counterDownGoalVal", 4);
     clearInterval(this.timer);
     this.updateGoalTimer();
   }
@@ -96,7 +106,9 @@ class TimeCountDown {
   }
 
   display_time() {
-    let disp_time = this.to_lose - this.start;
+    const to_lose = +localStorage.getItem("to_lose_ms");
+    const start_count_downer = +localStorage.getItem("start_count_downer");
+    let disp_time = to_lose - start_count_downer;
     if (disp_time < 0) {
       disp_time = 0 - disp_time;
       const mili = disp_time;
@@ -138,7 +150,10 @@ function handleCounterUpButtonClick() {
     console.log("its not a number");
   } else {
     console.log("we good");
-    counterUpGoalValue.textContent = `${input_field_val_int} hours`;
+    localStorage.setItem("counterUpGoalVal", input_field_val_int);
+    counterUpGoalValue.textContent = `${+localStorage.getItem(
+      "counterUpGoalVal"
+    )} hours`;
     input_field.value = "";
   }
 }
@@ -152,7 +167,10 @@ function handleCounterDownButtonClick() {
     console.log("its not a number");
   } else {
     console.log("we good");
-    counterDownTextValue.textContent = `${input_field_val_int} hours`;
+    localStorage.setItem("counterDownGoalVal", input_field_val_int);
+    counterDownTextValue.textContent = `${localStorage.getItem(
+      "counterDownGoalVal"
+    )} hours`;
     input_field_count_down.value = "";
     countDown.update_to_lose(input_field_val_int);
   }
@@ -190,9 +208,31 @@ function handle_main_button_click() {
 const appState = new AppState();
 const time = new Time();
 const countDown = new TimeCountDown();
-console.log("hello world");
-console.log(appState.previous_data);
 main_button.addEventListener("click", handle_main_button_click);
 reset_button.addEventListener("click", handle_reset_button_click);
 counterUpInputIdButton.addEventListener("click", handleCounterUpButtonClick);
 counterDownIdButton.addEventListener("click", handleCounterDownButtonClick);
+
+localStorage.setItem("test", 1);
++localStorage.getItem("test");
+
+if (localStorage.getItem("start") === null) {
+  localStorage.setItem("elapsed", 0);
+  localStorage.setItem("start", 0);
+  localStorage.setItem("counterUpGoalVal", 12);
+
+  localStorage.setItem("elapsed_count_downer", 0);
+  localStorage.setItem("start_count_downer", 0);
+  localStorage.setItem("to_lose_ms", 4 * 3600000);
+  localStorage.setItem("counterDownGoalVal", 4);
+}
+
+time.updateGoalTimer();
+counterUpGoalValue.textContent = `${+localStorage.getItem(
+  "counterUpGoalVal"
+)} hours`;
+
+countDown.updateGoalTimer();
+counterDownTextValue.textContent = `${+localStorage.getItem(
+  "counterDownGoalVal"
+)} hours`;
