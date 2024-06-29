@@ -29,6 +29,7 @@ class Time {
     this.timer = setInterval(() => {
       const temp = Date.now() - initial;
       localStorage.setItem("start", temp);
+      localStorage.setItem("elapsed", temp);
       this.updateGoalTimer();
     }, 1);
   }
@@ -80,6 +81,7 @@ class TimeCountDown {
     this.timer = setInterval(() => {
       const start_count_downer_temp = Date.now() - initial;
       localStorage.setItem("start_count_downer", start_count_downer_temp);
+      localStorage.setItem("elapsed_count_downer", start_count_downer_temp);
       this.updateGoalTimer();
     }, 1);
   }
