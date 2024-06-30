@@ -215,12 +215,12 @@ function handleHideButtonClick() {
   const hide1 = document.querySelector("#hide_1");
   const hide2 = document.querySelector("#hide_2");
   console.log(hide1.classList);
-  if (hide1.classList.contains("invisible")) {
-    hide1.classList.remove("invisible");
-    hide2.classList.remove("invisible");
+  if (hide1.classList.contains("hidden")) {
+    hide1.classList.remove("hidden");
+    hide2.classList.remove("hidden");
   } else {
-    hide1.classList.add("invisible");
-    hide2.classList.add("invisible");
+    hide1.classList.add("hidden");
+    hide2.classList.add("hidden");
   }
 }
 
